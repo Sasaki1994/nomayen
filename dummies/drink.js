@@ -1,0 +1,42 @@
+export default drink = [
+  {
+    key: 1,
+    created_at: new Date(),
+    price: 300,
+    nDrinks: 3,
+    drinkType: 'Hard',
+    readyEdit: false,
+  },
+  {
+    key: 2,
+    created_at: new Date(),
+    price: 400,
+    nDrinks: 3,
+    drinkType: 'Hard',
+    readyEdit: true,
+  },
+  {
+    key: 3,
+    created_at: new Date(),
+    price: 400,
+    nDrinks: 3,
+    drinkType: 'Hard',
+    readyEdit: false,
+  },
+  {
+    key: 4,
+    created_at: new Date(),
+    price: 400,
+    nDrinks: 3,
+    drinkType: 'Hard',
+    readyEdit: false,
+  },
+  {
+    key: 5,
+    created_at: new Date(),
+    price: 400,
+    nDrinks: 3,
+    drinkType: 'Hard',
+    readyEdit: false,
+  },
+];
