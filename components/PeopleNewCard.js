@@ -10,14 +10,9 @@ import { addPeople } from '../store/actions/people';
 import ButtonIcon from './ButtonIcon';
 
 export default PeopleNewCard = ({ cancelPress }) => {
-  initialState = {
+  const initialState = {
     name: '飲む人',
-    price: 0,
-    nDrinks: 0,
     drinkType: 'Hard',
-    check: false,
-    readyEdit: false,
-    drinks: [],
   };
   const [people, setPeople] = useState(initialState);
   const dispatch = useDispatch();

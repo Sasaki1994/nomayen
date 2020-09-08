@@ -4,7 +4,7 @@ import Card from './Card';
 import ButtonIcon from './ButtonIcon';
 import { useDispatch } from 'react-redux';
 import { deletePeople } from '../store/actions/people';
-import DrinkModal from './DrinkModal';
+import AddDrinkModal from './AddDrinkModal';
 import { useNavigation } from '@react-navigation/native';
 
 export default PeopleChangeCard = ({ people }) => {
@@ -38,7 +38,7 @@ export default PeopleChangeCard = ({ people }) => {
           onPress={() => dispatch(deletePeople(people))}
         />
       </View>
-      <DrinkModal
+      <AddDrinkModal
         isVisible={isVisible}
         toggleVisible={() => setIsVisible(!isVisible)}
         people={people}

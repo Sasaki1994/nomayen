@@ -6,7 +6,7 @@ import PeopleCard from '../components/PeopleCard';
 import PeopleAddCard from '../components/PeopleAddCard';
 import Footer from '../components/Footer';
 import { useDispatch } from 'react-redux';
-import { resetEdit } from '../store/actions/people';
+import { resetEdit } from '../store/actions/ui';
 
 export default ListScreen = ({
   data,

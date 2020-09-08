@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Card from './Card';
-import DrinkChangeCard from './DrinkChangeCard';
 import DrinkEmoji from './utils/DrinkEmoji';
 import YenFormat from './utils/YenFormat';
 import TimeFormat from './utils/TimeFormat';
-import DrinkModal from './DrinkModal';
+import DrinkModal from './AddDrinkModal';
 import { useDispatch } from 'react-redux';
-import { readyEditPeople } from '../store/actions/people';
+import { readyEditPeople, readyEditDrink } from '../store/actions/people';
 
-export default DrinkCard = ({ drink, people }) => {
+export default DrinkCard = ({ drink, people, onPress }) => {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
   const editReady = () => {
-    dispatch(readyEditPeople(people));
-    setIsVisible(!isVisible);
+    // dispatch(readyEditDrink(drink, people));
+    onPress();
   };
 
   return (
@@ -25,7 +24,7 @@ export default DrinkCard = ({ drink, people }) => {
         activeOpacity={0.2}
         onPress={editReady}
       >
-        <Text style={styles.created_at}>{TimeFormat(drink.created_at)}</Text>
+        <Text style={styles.created_at}>{drink.created_at}</Text>
         <View style={styles.sideStyle}>
           <Text style={styles.price}>{YenFormat(drink.price)}</Text>
           <Text style={styles.nDrinks}>
@@ -34,12 +33,6 @@ export default DrinkCard = ({ drink, people }) => {
           </Text>
         </View>
       </TouchableOpacity>
-      <DrinkModal
-        isVisible={isVisible}
-        toggleVisible={() => setIsVisible(!isVisible)}
-        people={people}
-        selectDrink={drink}
-      />
     </Card>
   );
 };

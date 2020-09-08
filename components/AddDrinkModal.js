@@ -12,7 +12,7 @@ import {
 import { addDrink, editDrink, deleteDrink } from '../store/actions/drink';
 import { useDispatch } from 'react-redux';
 
-export default DrinkModal = ({ isVisible, toggleVisible, people, drink }) => {
+export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
   const initialState =  {
     drinkType: 'Hard',
     price: 500,
@@ -28,11 +28,6 @@ export default DrinkModal = ({ isVisible, toggleVisible, people, drink }) => {
     toggleVisible();
   };
 
-  const deleteOrder = () => {
-    dispatch(deleteDrink(drink));
-    setDrink(initialState);
-    toggleVisible();
-  };
   return (
     <Modal isVisible={isVisible}>
       <View style={styles.window}>
