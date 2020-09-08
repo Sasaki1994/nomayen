@@ -5,7 +5,7 @@ import PeopleCard from '../components/PeopleCard';
 import PeopleAddCard from '../components/PeopleAddCard';
 import ListScreen from '../components/ListScreen';
 import { addPeople } from '../store/actions/people'
-import { readyEditPeople } from '../store/actions/ui';
+import { readyAddPeople, readyEditPeople } from '../store/actions/ui';
 import { View } from 'native-base';
 import CheckModal from '../components/CheckModal';
 

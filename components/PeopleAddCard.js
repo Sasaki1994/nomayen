@@ -7,33 +7,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { readyAddPeople, resetEdit } from '../store/actions/ui';
 
 export default PeopleAddCard = () => {
-  const peopleEdit = useSelector(state => state.ui.peopleEdit)
+  // const peopleEdit = useSelector(state => state.ui.peopleEdit)
   const dispatch = useDispatch()
-  const [isAdd, setIsAdd] = useState(false);
-  const changeAdd = (isAdd) => {
-    if (isAdd){
-      setIsAdd(false);
-      dispatch(resetEdit());
-    } else {
-      setIsAdd(true);
-      dispatch(readyAddPeople());
-    }
-  }
-  if (isAdd && peopleEdit.isAdd) {
-    return <PeopleNewCard cancelPress={() => changeAdd(isAdd)} />;
+  // const [isAdd, setIsAdd] = useState(false);
+  // const changeAdd = (isAdd) => {
+  //   if (isAdd){
+  //     setIsAdd(false);
+  //     dispatch(resetEdit());
+  //   } else {
+  //     setIsAdd(true);
+  //     dispatch(readyAddPeople());
+  //   }
+  // }
+  const {peopleEdit} = useSelector(state => state.ui);
+  if (peopleEdit.isAdd) {
+    return <PeopleNewCard cancelPress={()=>dispatch(resetEdit())} />;
   } else {
     return (
       <Card>
         <TouchableOpacity
           activeOpacity={0.2}
           style={styles.iconCard}
-          onPress={() => changeAdd(isAdd)}
+          onPress={()=>dispatch(readyAddPeople())}
         >
           <ButtonIcon
             iconName={'user-plus'}
             text={'追加'}
             size={48}
-            onPress={() => changeAdd(isAdd)}
+            onPress={() => dispatch(readyAddPeople())}
           />
         </TouchableOpacity>
       </Card>

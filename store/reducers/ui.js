@@ -26,6 +26,7 @@ const reducer = (state = initialState, action) => {
       const peopleEditState = {...initialState}
       peopleEditState.peopleEdit.isEdit = true;
       peopleEditState.peopleEdit.peopleId = action.payload;
+      peopleEditState.peopleEdit.isAdd = false;
       return peopleEditState;
 
     case 'RESET_EDIT':

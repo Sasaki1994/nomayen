@@ -11,6 +11,7 @@ import {
 } from 'react-native-gesture-handler';
 import { addDrink, editDrink, deleteDrink } from '../store/actions/drink';
 import { useDispatch } from 'react-redux';
+import { resetEdit } from '../store/actions/ui';
 
 export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
   const initialState =  {
@@ -24,6 +25,9 @@ export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
   const order = () => {
     dispatch(
       addDrink(drink)
+    );
+    dispatch(
+      resetEdit()
     );
     toggleVisible();
   };
