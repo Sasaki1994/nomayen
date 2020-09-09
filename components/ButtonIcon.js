@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-export default ButtonIcon = ({ iconName, text, size, onPress, style }) => {
+const ButtonIcon = ({ iconName, text, size, onPress, style }) => {
   // iconName : FontAwoesome5 of https://icons.expo.fyi/
   return (
     <TouchableOpacity activeOpacity={0.2} onPress={onPress} style={style}>
@@ -29,3 +29,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default ButtonIcon;

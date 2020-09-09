@@ -1,26 +1,22 @@
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mockState } from '../dummies/state';
+import {entityToList} from '../store/services/commonService';
 import PeopleCard from '../components/PeopleCard';
 import PeopleAddCard from '../components/PeopleAddCard';
 import ListScreen from '../components/ListScreen';
-import { addPeople } from '../store/actions/people'
-import { readyAddPeople, readyEditPeople } from '../store/actions/ui';
-import { View } from 'native-base';
+import {  readyEditPeople } from '../store/actions/ui';
 import CheckModal from '../components/CheckModal';
 
-export default HOME = ({ navigation }) => {
-  const people_obj = useSelector((state) => state.people);
-  const people = people_obj.allIds.map(id => people_obj.byId[id]).filter(people => !people.deleted);
-  const [isVisible, setIsVisible] = useState(false);
-  const initialCheck = { price: 10000 };
-  const [check, setCheck] = useState(initialCheck);
+const HOME = ({ navigation }) => {
+  const { people } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const peopleEdit = useSelector((state) => state.ui.peopleEdit);
+  const peopleList = entityToList(people).filter(person => !person.deleted);
+  const [isVisible, setIsVisible] = useState(false);
+  const [check, setCheck] = useState({ price: 10000 });
   return (
     <>
       <ListScreen
-        data={people}
+        data={peopleList}
         renderItem={({ item }) => (
           <PeopleCard
             people={item}
@@ -42,3 +38,5 @@ export default HOME = ({ navigation }) => {
     </>
   );
 };
+
+export default HOME;

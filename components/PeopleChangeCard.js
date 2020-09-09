@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { deletePeople } from '../store/actions/people';
 import AddDrinkModal from './AddDrinkModal';
 import { useNavigation } from '@react-navigation/native';
+import { readyAddDrink } from '../store/actions/ui';
 
-export default PeopleChangeCard = ({ people }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const PeopleChangeCard = ({ people }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
@@ -29,7 +29,7 @@ export default PeopleChangeCard = ({ people }) => {
           iconName={'beer'}
           text={'注文'}
           size={36}
-          onPress={() => setIsVisible(!isVisible)}
+          onPress={() => dispatch(readyAddDrink())}
         />
         <ButtonIcon
           iconName={'trash'}
@@ -38,11 +38,7 @@ export default PeopleChangeCard = ({ people }) => {
           onPress={() => dispatch(deletePeople(people))}
         />
       </View>
-      <AddDrinkModal
-        isVisible={isVisible}
-        toggleVisible={() => setIsVisible(!isVisible)}
-        people={people}
-      />
+      <AddDrinkModal people={people} />
     </Card>
   );
 };
@@ -55,3 +51,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+export default PeopleChangeCard;

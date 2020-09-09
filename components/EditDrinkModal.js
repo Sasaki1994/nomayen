@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
 import Modal from 'react-native-modal';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import ButtonIcon from './ButtonIcon';
-
 import YenFormat from './utils/YenFormat';
 import DrinkEmoji, { drinkTypeList } from './utils/DrinkEmoji';
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import { addDrink, editDrink, deleteDrink } from '../store/actions/drink';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { editDrink, deleteDrink } from '../store/actions/drink';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetEdit } from '../store/actions/ui';
 
-export default EditDrinkModal = ({ isVisible, toggleVisible, drinkId }) => {
-  if (drinkId == null) {
-    return null
-  } else {
-    const initialState = useSelector(state => state.drinks.byId[drinkId])
-    const [drink, setDrink] = useState(initialState);
+const EditDrinkModal = () => {
+    const { drinks } = useSelector(state => state);
+    const { drinkEdit } = useSelector(state => state.ui);
+    const [drink, setDrink] = useState(drinks.byId[drinkEdit.drinkId]);
     const dispatch = useDispatch();
     const editOrder = () => {
-      dispatch(
-        editDrink(drink)
-      );
-      toggleVisible();
+      dispatch(editDrink(drink));
+      dispatch(resetEdit());
     };
 
-    const deleteOrder = () => {
-      dispatch(deleteDrink(drink));
-      toggleVisible();
-    };
     return (
-      <Modal isVisible={isVisible}>
+      <Modal isVisible={drinkEdit.isEdit}>
         <View style={styles.window}>
-            <View style={styles.deleteBox}>
-              <TouchableOpacity onPress={deleteOrder} style={styles.deleteButton}>
-                <Text style={styles.deleteText}>削除</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.deleteBox}>
+            <TouchableOpacity onPress={() => dispatch(deleteDrink(drink))} style={styles.deleteButton}>
+              <Text style={styles.deleteText}>削除</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.priceBox}>
             <Text style={styles.text}>{YenFormat(drink.price)}</Text>
             <ButtonIcon
@@ -90,14 +79,14 @@ export default EditDrinkModal = ({ isVisible, toggleVisible, drinkId }) => {
             <TouchableOpacity onPress={editOrder} style={styles.orderButton}>
               <Text style={styles.orderText}>注文</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={toggleVisible} style={styles.cancelButton}>
+            <TouchableOpacity onPress={() => dispatch(resetEdit())} style={styles.cancelButton}>
               <Text style={styles.cancelText}>キャンセル</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
     );
-  }
+
 };
 
 const styles = StyleSheet.create({
@@ -209,3 +198,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default EditDrinkModal;

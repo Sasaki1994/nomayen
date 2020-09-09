@@ -1,7 +1,6 @@
 import React from 'react';
 import { Footer, FooterTab } from 'native-base';
-import { StyleSheet, Text } from 'react-native';
-import Card from './Card';
+import { StyleSheet } from 'react-native';
 import ButtonIcon from './ButtonIcon';
 
 export default ({ iconName, text, onPress }) => {

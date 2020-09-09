@@ -3,26 +3,20 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Card from './Card';
 import DrinkEmoji from './utils/DrinkEmoji';
 import YenFormat from './utils/YenFormat';
-import TimeFormat from './utils/TimeFormat';
-import DrinkModal from './AddDrinkModal';
-import { useDispatch } from 'react-redux';
-import { readyEditPeople, readyEditDrink } from '../store/actions/people';
+import { useDispatch, useSelector } from 'react-redux';
+import { readyEditDrink, resetEdit } from '../store/actions/ui';
+import EditDrinkModal from './EditDrinkModal';
 
-export default DrinkCard = ({ drink, people, onPress }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const DrinkCard = ({ drink }) => {
   const dispatch = useDispatch();
-
-  const editReady = () => {
-    // dispatch(readyEditDrink(drink, people));
-    onPress();
-  };
+  const { drinkEdit } = useSelector(state => state.ui)
 
   return (
     <Card>
       <TouchableOpacity
         style={styles.touchableCard}
         activeOpacity={0.2}
-        onPress={editReady}
+        onPress={() => dispatch(readyEditDrink(drink))}
       >
         <Text style={styles.created_at}>{drink.created_at}</Text>
         <View style={styles.sideStyle}>
@@ -33,6 +27,7 @@ export default DrinkCard = ({ drink, people, onPress }) => {
           </Text>
         </View>
       </TouchableOpacity>
+      {drinkEdit.isEdit && <EditDrinkModal/>}
     </Card>
   );
 };
@@ -61,3 +56,5 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
+
+export default DrinkCard;

@@ -1,27 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Card from './Card';
 import ButtonIcon from './ButtonIcon';
 import PeopleNewCard from './PeopleNewCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { readyAddPeople, resetEdit } from '../store/actions/ui';
+import { readyAddPeople } from '../store/actions/ui';
 
-export default PeopleAddCard = () => {
-  // const peopleEdit = useSelector(state => state.ui.peopleEdit)
+const PeopleAddCard = () => {
+  const { peopleEdit } = useSelector(state => state.ui);
   const dispatch = useDispatch()
-  // const [isAdd, setIsAdd] = useState(false);
-  // const changeAdd = (isAdd) => {
-  //   if (isAdd){
-  //     setIsAdd(false);
-  //     dispatch(resetEdit());
-  //   } else {
-  //     setIsAdd(true);
-  //     dispatch(readyAddPeople());
-  //   }
-  // }
-  const {peopleEdit} = useSelector(state => state.ui);
+
   if (peopleEdit.isAdd) {
-    return <PeopleNewCard cancelPress={()=>dispatch(resetEdit())} />;
+    return <PeopleNewCard />;
   } else {
     return (
       <Card>
@@ -50,3 +40,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default PeopleAddCard

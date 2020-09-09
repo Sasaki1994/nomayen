@@ -1,5 +1,3 @@
-
-
 export const addPeople = (people) => {
   return {
     type: 'ADD_PEOPLE',
@@ -21,9 +19,8 @@ export const changeCheck = (people) => {
   };
 };
 
-
-export const resetEdit = () => {
+export const destroyPeople = () => {
   return {
-    type: 'RESET_EDIT',
+    type: 'DESTROY'
   };
-};
+}

@@ -1,14 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import people from '../dummies/people';
-import { Container } from 'native-base';
-import PeopleCard from '../components/PeopleCard';
-import PeopleAddCard from '../components/PeopleAddCard';
+import { StyleSheet, View, FlatList } from 'react-native';
 import Footer from '../components/Footer';
 import { useDispatch } from 'react-redux';
 import { resetEdit } from '../store/actions/ui';
 
-export default ListScreen = ({
+const ListScreen = ({
   data,
   renderItem,
   keyExtractor,
@@ -63,3 +59,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default ListScreen;

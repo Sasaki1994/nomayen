@@ -29,9 +29,3 @@ export const readyEditDrink = (drink) => {
     payload: drink.id,
   };
 };
-
-export const resetEditDrink = () => {
-  return {
-    type: 'RESET_EDIT_DRINK',
-  };
-};

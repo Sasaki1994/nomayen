@@ -7,10 +7,13 @@ import ButtonIcon from '../components/ButtonIcon';
 import Home from '../screens/Home';
 import Check from '../screens/Check';
 import Drink from '../screens/Drink';
+import { destroyPeople } from '../store/actions/people';
+import { destroyDrinks } from '../store/actions/drink';
+import { useDispatch } from 'react-redux';
 
 const Stack = createStackNavigator();
 
-const headerIcon = (position, iconName) => {
+const headerIcon = (position, iconName, onPress) => {
   let style;
   switch (position) {
     case 'Left':
@@ -26,12 +29,17 @@ const headerIcon = (position, iconName) => {
 
   return () => (
     <View style={style}>
-      <ButtonIcon iconName={iconName} text={''} size={18} />
+      <ButtonIcon iconName={iconName} text={''} size={18} onPress={onPress}/>
     </View>
   );
 };
 
-export default AppNavigator = () => {
+const AppNavigator = () => {
+  const dispatch = useDispatch();
+  const destroy = () => {
+    dispatch(destroyPeople());
+    dispatch(destroyDrinks());
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -40,8 +48,7 @@ export default AppNavigator = () => {
           component={Home}
           options={{
             headerTitle: '参加者一覧',
-            headerLeft: headerIcon('Left', 'sync-alt'),
-            headerRight: headerIcon('Right', 'user-plus'),
+            headerLeft: headerIcon('Left', 'sync-alt', destroy),
           }}
         />
         <Stack.Screen
@@ -56,7 +63,6 @@ export default AppNavigator = () => {
           component={Drink}
           options={({ route }) => ({
             headerTitle: route.params.title,
-            headerRight: headerIcon('Right', 'beer'),
           })}
         />
       </Stack.Navigator>
@@ -77,3 +83,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default AppNavigator;

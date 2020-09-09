@@ -20,3 +20,9 @@ export const deleteDrink = (drink) => {
     payload: drink.id,
   };
 };
+
+export const destroyDrinks = () => {
+  return {
+    type: 'DESTROY'
+  };
+}

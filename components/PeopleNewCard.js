@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Card from './Card';
-import PeopleChangeCard from './PeopleChangeCard';
-import DrinkEmoji from './utils/DrinkEmoji';
-import YenFormat from './utils/YenFormat';
 import { TextInput } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { addPeople } from '../store/actions/people';
 import ButtonIcon from './ButtonIcon';
 
-export default PeopleNewCard = ({ cancelPress }) => {
+const PeopleNewCard = () => {
   const initialState = {
     name: '飲む人',
     drinkType: 'Hard',
@@ -61,3 +58,5 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
+
+export default PeopleNewCard

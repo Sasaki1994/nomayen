@@ -6,20 +6,11 @@ import DrinkEmoji from './utils/DrinkEmoji';
 import YenFormat from './utils/YenFormat';
 import CheckMark from './utils/CheckMark';
 import { changeCheck } from '../store/actions/people';
+import { sumDrinksAndSumPrice } from '../store/services/drinkService';
 
-export default CheckCard = ({ people, otherPrice }) => {
-  const drinks = useSelector(state => state.drinks);
-  const drinkList = drinks.allIds.map(id => drinks.byId[id]);
-  const peopleDrinkList = drinkList.filter(drink => drink.peopleId === people.id && !drink.deleted);
-  const sumPrice = peopleDrinkList.reduce(
-    (sum, drink) => sum + drink.nDrinks * drink.price,
-    0
-  );
-
-  const sumDrinks = peopleDrinkList.reduce(
-    (sum, drink) => sum + drink.nDrinks,
-    0
-  );
+const CheckCard = ({ people, otherPrice }) => {
+  const {drinks} = useSelector((state) => state);
+  const [sumDrinks, sumPrice] = sumDrinksAndSumPrice(drinks, people)
   const dispatch = useDispatch();
 
   return (
@@ -73,3 +64,5 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
+
+export default CheckCard;

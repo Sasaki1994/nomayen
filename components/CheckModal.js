@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-native-modal';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
   TextInput,
 } from 'react-native';
-import { Button, StyleProvider } from 'native-base';
-
-import YenFormat from './utils/YenFormat';
-import DrinkEmoji, { drinkTypeList } from './utils/DrinkEmoji';
 import {
   TouchableOpacity,
-  TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import { addDrink } from '../store/actions/people';
-import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
-export default checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
+const checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
   const navigation = useNavigation();
   const checking = () => {
     toggleVisible();
@@ -35,11 +27,11 @@ export default checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
         </View>
         <View style={styles.priceBox}>
           <TextInput
-            keyboardType={'numeric'}
             style={styles.priceText}
             onChangeText={(text) => setCheck({ ...check, price: text })}
-            value={check.price}
+            value={String(check.price)}
             autoFocus={true}
+            keyboardType={'numeric'}
           />
         </View>
 
@@ -155,3 +147,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default checkModal;

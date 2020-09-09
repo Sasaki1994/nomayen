@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-native-modal';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import ButtonIcon from './ButtonIcon';
-
 import YenFormat from './utils/YenFormat';
 import DrinkEmoji, { drinkTypeList } from './utils/DrinkEmoji';
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import { addDrink, editDrink, deleteDrink } from '../store/actions/drink';
-import { useDispatch } from 'react-redux';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { addDrink } from '../store/actions/drink';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetEdit } from '../store/actions/ui';
 
-export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
+const AddDrinkModal = ({ people }) => {
   const initialState =  {
     drinkType: 'Hard',
     price: 500,
@@ -21,19 +17,15 @@ export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
     peopleId: people.id
   };
   const [drink, setDrink] = useState(initialState);
+  const { drinkEdit } = useSelector(state => state.ui)
   const dispatch = useDispatch();
   const order = () => {
-    dispatch(
-      addDrink(drink)
-    );
-    dispatch(
-      resetEdit()
-    );
-    toggleVisible();
+    dispatch(addDrink(drink));
+    dispatch(resetEdit());
   };
 
   return (
-    <Modal isVisible={isVisible}>
+    <Modal isVisible={drinkEdit.isAdd}>
       <View style={styles.window}>
         <View style={styles.priceBox}>
           <Text style={styles.text}>{YenFormat(drink.price)}</Text>
@@ -87,7 +79,7 @@ export default AddDrinkModal = ({ isVisible, toggleVisible, people }) => {
           <TouchableOpacity onPress={order} style={styles.orderButton}>
             <Text style={styles.orderText}>注文</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={toggleVisible} style={styles.cancelButton}>
+          <TouchableOpacity onPress={() => dispatch(resetEdit())} style={styles.cancelButton}>
             <Text style={styles.cancelText}>キャンセル</Text>
           </TouchableOpacity>
         </View>
@@ -205,3 +197,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default AddDrinkModal;

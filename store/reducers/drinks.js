@@ -1,5 +1,3 @@
-import people from '../../dummies/people';
-import { readyEdit, editDrink } from '../actions/people';
 import generateNewId from './utils/generateNewId';
 
 const initialState = {byId:{}, allIds:[]};
@@ -25,13 +23,12 @@ const reducer = (state = initialState, action) => {
       deletedDrink[action.payload].deleted = true
       return {...state, byId:{...deletedDrink}};
 
+    case 'DESTROY':
+      return {byId:{}, allIds:[]};
+
     default:
       return state;
   }
 };
-
-function drinkKeys(people) {
-  return people.drinks.map((drink) => drink.key);
-}
 
 export default reducer;
