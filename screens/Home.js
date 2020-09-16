@@ -12,7 +12,7 @@ const HOME = ({ navigation }) => {
   const dispatch = useDispatch();
   const peopleList = entityToList(people).filter(person => !person.deleted);
   const [isVisible, setIsVisible] = useState(false);
-  const [check, setCheck] = useState({ price: 10000 });
+  const [check, setCheck] = useState({ price: 0 });
   return (
     <>
       <ListScreen

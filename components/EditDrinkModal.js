@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     height: 40,
-    width: 90,
+    width: 100,
     margin: 20,
     borderRadius: 5,
   },

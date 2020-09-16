@@ -26,8 +26,8 @@ const PeopleCard = ({ people, onPress }) => {
           <View style={styles.sideStyle}>
             <Text style={styles.price}>{YenFormat(sumPrice)}</Text>
             <Text style={styles.nDrinks}>
-              {sumDrinks}
-              {DrinkEmoji(people.drinkType)}
+              {people.number}
+              {'人'}
             </Text>
           </View>
         </TouchableOpacity>

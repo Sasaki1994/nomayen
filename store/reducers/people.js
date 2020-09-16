@@ -1,6 +1,7 @@
 import generateNewId from './utils/generateNewId';
 
-const initialState = {byId:{}, allIds:[]};
+const initialState = {
+  byId:{}, allIds:[]};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PEOPLE':
@@ -9,7 +10,7 @@ const reducer = (state = initialState, action) => {
       addPeople[newId] = {
           id: newId,
           name: action.payload.name,
-          drinkType: action.payload.drinkType,
+          number: action.payload.number,
           deleted: false,
           check: false
         }

@@ -4,6 +4,7 @@ import CheckCard from '../components/CheckCard';
 import ListScreen from '../components/ListScreen';
 import { sumDrinksAndSumPrice, sumDeletedPeoplePrice } from '../store/services/drinkService';
 import { entityToList } from '../store/services/commonService';
+import { sumPeople } from '../store/services/peopleService';
 
 const Check = ({ route, navigation }) => {
   const { check } = route.params;
@@ -11,7 +12,8 @@ const Check = ({ route, navigation }) => {
   const peopleList = entityToList(people).filter(person => !person.deleted);
   const [_, sumAllDrinksPrice] = sumDrinksAndSumPrice(drinks)
   const deletedPeoplePrice = sumDeletedPeoplePrice(drinks, people)
-  const otherPrice = (check.price - sumAllDrinksPrice + deletedPeoplePrice) / peopleList.length;
+  const allPeopleNum = sumPeople(peopleList);
+  const otherPrice = (check.price - sumAllDrinksPrice + deletedPeoplePrice) / allPeopleNum;
   return (
     <ListScreen
       data={peopleList}

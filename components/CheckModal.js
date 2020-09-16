@@ -1,24 +1,20 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
-import {
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TextInput,　Keyboard} from 'react-native';
+import { TouchableOpacity, } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 const checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
   const navigation = useNavigation();
   const checking = () => {
+    Keyboard.dismiss();
     toggleVisible();
-    navigation.navigate('Check', {
-      check: check,
-    });
+    navigation.navigate('Check', { check: check});
   };
+  const canceling = () => {
+    Keyboard.dismiss();
+    toggleVisible();
+  }
   return (
     <Modal isVisible={isVisible}>
       <View style={styles.window}>
@@ -29,7 +25,9 @@ const checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
           <TextInput
             style={styles.priceText}
             onChangeText={(text) => setCheck({ ...check, price: text })}
-            value={String(check.price)}
+            // defaultValue={''}
+            // value={String(check.price)}
+            placeholder={'税込金額'}
             autoFocus={true}
             keyboardType={'numeric'}
           />
@@ -39,7 +37,7 @@ const checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
           <TouchableOpacity onPress={checking} style={styles.orderButton}>
             <Text style={styles.orderText}>決定</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={toggleVisible} style={styles.cancelButton}>
+          <TouchableOpacity onPress={canceling} style={styles.cancelButton}>
             <Text style={styles.cancelText}>キャンセル</Text>
           </TouchableOpacity>
         </View>
@@ -50,8 +48,9 @@ const checkModal = ({ isVisible, toggleVisible, check, setCheck }) => {
 
 const styles = StyleSheet.create({
   window: {
-    flex: 0.6,
+    flex: 1.0,
     borderRadius: 5,
+    marginBottom: '70%',
     padding: 10,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     height: 40,
-    width: 90,
+    width: 100,
     margin: 20,
     borderRadius: 5,
   },

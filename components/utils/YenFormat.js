@@ -1,5 +1,5 @@
 export default function (price) {
-  let separatedNum = String(price).split('.');
+  let separatedNum = String(Math.ceil(price)).split('.');
   let numWithComma = String(separatedNum[0]).replace(
     /(\d)(?=(\d\d\d)+(?!\d))/g,
     '$1,'

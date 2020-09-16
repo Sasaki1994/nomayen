@@ -17,7 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.sasakitatsuya.nomayen",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.sasakitatsuya.nomayen",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
